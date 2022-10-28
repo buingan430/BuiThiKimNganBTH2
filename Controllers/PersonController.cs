@@ -5,14 +5,14 @@ using BuiThiKimNganBTH2.Models;
 
 namespace BuiThiKimNganBTH2.Controllers
 {
-    public class PersonController : Controller
+   public class PersonController : Controller
     {
         private readonly ApplicationDbContext _context;
-        public PersonController(ApplicationDbContext context)
+        public PersonController (ApplicationDbContext context)
         {
             _context = context;
-
         }
+
         public async Task<IActionResult> Index()
         {
             var model = await _context.Persons.ToListAsync();
@@ -23,16 +23,96 @@ namespace BuiThiKimNganBTH2.Controllers
             return View();
         }
         [HttpPost]
-        
         public async Task<IActionResult> Create (Person std)
         {
-            if (ModelState.IsValid)
+            if(ModelState.IsValid)
             {
                 _context.Add(std);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(std);
+            
+        }
+        // GET: Person/Edit/5
+        public async Task<IActionResult> Edit(string id)
+        {
+            if (id == null)
+            {
+                return View("NotFound");
+            }
+            var Person = await _context.Persons.FindAsync(id);
+            if (Person== null)
+            {
+               // return NotFound();
+               return View("NotFound");
+            }
+            return View(Person);
+        }
+        // POST: Person/Edit
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+
+        public async Task<IActionResult>Edit(string id, [Bind("PersonID,PersonName")] Person std)
+        {
+            if (id != std.PersonID)
+            {
+               // return NotFound();
+               return View("NotFound");
+            }
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(std);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if( !PersonExists(std.PersonID))
+                    {
+                       // return NotFound();
+                       return View("NotFound");
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            return View(std);
+        }
+        public async Task<IActionResult> Delete(string id)
+        {
+            if (id == null)
+            {
+               // return NotFound();
+               return View("NotFound");
+            }
+            var std = await _context.Persons
+                .FirstOrDefaultAsync(m =>m.PersonID ==id);
+            if (std == null)
+            {
+               // return NotFound();
+               return View("NotFound");
+            }
+            return View(std);
+        }
+        // POST: Product/Delete/
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(string id)
+        {
+            var std = await _context.Persons.FindAsync(id);
+            _context.Persons.Remove(std);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+        private bool PersonExists(string id)
+        {
+            return _context.Persons.Any(e =>e.PersonID ==id);
         }
     }
 }
+    

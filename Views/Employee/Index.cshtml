@@ -1,17 +1,21 @@
 @model IEnumerable<BuiThiKimNganBTH2.Models.Employee>
     <p>
-        <a class="btn btn-success" asp-action ="Create">Create a new Employee</a>
+        <a class="btn btn-success" asp-action="Create">Create a new Employee</a>
     </p>
-    <table class= " table table-all">
+    <table class=" table table-all">
         <tr>
             <th>Employee ID</th>
             <th>Employee Name</th>
         </tr>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>@Html.DisplayFor(m => item.EmployeeID)</td>
-                <td>@Html.DisplayFor(m => item.EmployeeName)</td>
-            </tr>
+        <tr>
+            <td>@Html.DisplayFor(m => item.EmployeeID)</td>
+            <td>@Html.DisplayFor(m => item.EmployeeName)</td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.EmployeeID">Sửa</a>|
+                <a asp-action="Delete" asp-route-id="@item.EmployeeID">Xóa</a>
+            </td>
+        </tr>
         }
     </table>
