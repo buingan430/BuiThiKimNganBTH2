@@ -10,24 +10,46 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BuiThiKimNganBTH2.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221011165438_Person")]
-    partial class Person
+    [Migration("20221105151058_Creae_Table_Customer")]
+    partial class Creae_Table_Customer
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.10");
 
-            modelBuilder.Entity("BuiThiKimNganBTH2.Models.Employee", b =>
+            modelBuilder.Entity("BuiThiKimNganBTH2.Models.Customer", b =>
                 {
-                    b.Property<string>("EmployeeID")
+                    b.Property<string>("CustomerID")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("EmployeeName")
+                    b.Property<string>("Adress")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.HasKey("EmployeeID");
+                    b.Property<string>("CustomerName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("CustomerID");
+
+                    b.ToTable("Customers");
+                });
+
+            modelBuilder.Entity("BuiThiKimNganBTH2.Models.Employee", b =>
+                {
+                    b.Property<string>("EmpID")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Adress")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("EmpName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("EmpID");
 
                     b.ToTable("Employees");
                 });

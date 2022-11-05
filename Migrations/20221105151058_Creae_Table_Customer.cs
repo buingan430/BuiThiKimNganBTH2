@@ -4,13 +4,13 @@
 
 namespace BuiThiKimNganBTH2.Migrations
 {
-    public partial class Create_Table_Employee : Migration
+    public partial class Creae_Table_Customer : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<string>(
                 name: "Adress",
-                table: "Employees",
+                table: "Customers",
                 type: "TEXT",
                 nullable: false,
                 defaultValue: "");
@@ -20,7 +20,7 @@ namespace BuiThiKimNganBTH2.Migrations
         {
             migrationBuilder.DropColumn(
                 name: "Adress",
-                table: "Employees");
+                table: "Customers");
         }
     }
 }

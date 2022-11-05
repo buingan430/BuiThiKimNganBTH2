@@ -4,7 +4,7 @@
 
 namespace BuiThiKimNganBTH2.Migrations
 {
-    public partial class Customer : Migration
+    public partial class Create_Table_Student : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

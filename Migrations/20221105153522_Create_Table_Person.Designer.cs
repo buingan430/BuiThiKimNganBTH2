@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BuiThiKimNganBTH2.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221011170533_Customer")]
-    partial class Customer
+    [Migration("20221105153522_Create_Table_Person")]
+    partial class Create_Table_Person
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,6 +21,10 @@ namespace BuiThiKimNganBTH2.Migrations
             modelBuilder.Entity("BuiThiKimNganBTH2.Models.Customer", b =>
                 {
                     b.Property<string>("CustomerID")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Adress")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("CustomerName")
@@ -34,14 +38,18 @@ namespace BuiThiKimNganBTH2.Migrations
 
             modelBuilder.Entity("BuiThiKimNganBTH2.Models.Employee", b =>
                 {
-                    b.Property<string>("EmployeeID")
+                    b.Property<string>("EmpID")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("EmployeeName")
+                    b.Property<string>("Adress")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.HasKey("EmployeeID");
+                    b.Property<string>("EmpName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("EmpID");
 
                     b.ToTable("Employees");
                 });
@@ -49,6 +57,10 @@ namespace BuiThiKimNganBTH2.Migrations
             modelBuilder.Entity("BuiThiKimNganBTH2.Models.Person", b =>
                 {
                     b.Property<string>("PersonID")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Adress")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("PersonName")
@@ -63,6 +75,10 @@ namespace BuiThiKimNganBTH2.Migrations
             modelBuilder.Entity("BuiThiKimNganBTH2.Models.Student", b =>
                 {
                     b.Property<string>("StudentID")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Adress")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("StudentName")

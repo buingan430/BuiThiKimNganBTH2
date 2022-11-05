@@ -21,6 +21,10 @@ namespace BuiThiKimNganBTH2.Migrations
                     b.Property<string>("CustomerID")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Adress")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("CustomerName")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -32,18 +36,18 @@ namespace BuiThiKimNganBTH2.Migrations
 
             modelBuilder.Entity("BuiThiKimNganBTH2.Models.Employee", b =>
                 {
-                    b.Property<string>("EmployeeID")
+                    b.Property<string>("EmpID")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Adress")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("EmployeeName")
+                    b.Property<string>("EmpName")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.HasKey("EmployeeID");
+                    b.HasKey("EmpID");
 
                     b.ToTable("Employees");
                 });
@@ -51,6 +55,10 @@ namespace BuiThiKimNganBTH2.Migrations
             modelBuilder.Entity("BuiThiKimNganBTH2.Models.Person", b =>
                 {
                     b.Property<string>("PersonID")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Adress")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("PersonName")
@@ -65,6 +73,10 @@ namespace BuiThiKimNganBTH2.Migrations
             modelBuilder.Entity("BuiThiKimNganBTH2.Models.Student", b =>
                 {
                     b.Property<string>("StudentID")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Adress")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("StudentName")

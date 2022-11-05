@@ -6,5 +6,6 @@ namespace BuiThiKimNganBTH2.Models
     {
         public string PersonID { get; set; }
         public string PersonName { get; set; }
+        public string Adress { get; set; }
     }
 }
