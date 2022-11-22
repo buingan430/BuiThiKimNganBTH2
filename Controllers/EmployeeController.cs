@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using BuiThiKimNganBTH2.Data;
 using BuiThiKimNganBTH2.Models.Process;
 using BuiThiKimNganBTH2.Models;
+using BuiThiKimNganBTH2.Models.Process;
 
 
 namespace BuiThiKimNganBTH2.Controllers
@@ -10,6 +11,7 @@ namespace BuiThiKimNganBTH2.Controllers
    public class EmployeeController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private StringProcess StrPro = new StringProcess();
         private ExcelProcess _excelProcess = new ExcelProcess();
         public EmployeeController (ApplicationDbContext context)
         { 
@@ -17,35 +19,38 @@ namespace BuiThiKimNganBTH2.Controllers
         }
         public async Task<IActionResult> Index()
         {
+            
             return View(await _context.Employees.ToListAsync());
         }
-        public bool EmployeeExists(string id)
-        {
-            return _context.Employees.Any(e =>e.EmpID == id);
-        }
+        // public bool EmployeeExists(string id)
+        // {
+        //     return _context.Employees.Any(e =>e.EmpID == id);
+        // }
 
         // public async Task<IActionResult> Index()
         // {
         //     var model = await _context.Employees.ToListAsync();
         //     return View(model);
         // }
-        // public IActionResult Create()
-        // {
-        //     return View();
-        // }
-        // [HttpPost]
-        // public async Task<IActionResult> Create (Employee std)
-        // {
-        //     if(ModelState.IsValid)
-        //     {
-        //         _context.Add(std);
-        //         await _context.SaveChangesAsync();
-        //         return RedirectToAction(nameof(Index));
-        //     }
-        //     return View(std);
+        public IActionResult Create()
+        {
+            var id = _context.Employees.OrderByDescending(m =>m.EmpName).First ().EmpID;
+            ViewBag.newKey = StrPro.AutoGenerateCode(id);
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> Create (Employee std)
+        {
+            if(ModelState.IsValid)
+            {
+                _context.Add(std);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(std);
             
-        // }
-        // // GET: Employee/Edit/5
+        }
+     // GET: Employee/Edit/5
         // public async Task<IActionResult> Edit(string id)
         // {
         //     if (id == null)
